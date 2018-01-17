@@ -1,0 +1,87 @@
+<link rel="import" href="./polymer-element.html">
+<link rel="import" href="./nav-list-items.html">
+
+
+<dom-module id="nav-list">
+    <template>
+        <style>
+            h4 {
+                font-size: 25px;
+                padding-left: 10px;
+            }
+            iron-list {
+                height: 100%;
+                overflow-y: scroll;
+            }
+            iron-icon {
+                 margin-right: 10px;
+                 vertical-align: middle;
+            }
+            .item .header {
+                padding: 5px;
+                font-size: 20px;
+                background-color: var(--paper-light-blue-900);
+                color: #fff;
+            }
+            
+
+        </style>
+        
+        <iron-list items="[[category]]" as="item">
+            <template>
+                <div class="item"> 
+                    <div class="header">
+                         <iron-icon icon="[[item.icon]]"></iron-icon>
+                    [[item.name]] 
+                    </div>
+                   
+                    <div class="item-inner">
+                        <nav-list-item id="[[item.id]]"></nav-list-item>
+                    </div>
+                </div>
+                
+            </template>
+    </iron-list>
+
+
+    </template>
+
+    <script>
+        class NavList extends Polymer.Element {
+            static get is() {
+                return 'nav-list';
+            }
+            static get properties() {
+                return {
+                    category: {
+                        type: Array,
+                        value: [{
+                            id: 0,
+                            name: 'เครื่องสแกนลายนิ้วมือ',
+                            icon: 'fingerprint'
+                        }, {
+                            id: 1,
+                            name: 'กล้องวงจรปิด',
+                            icon: 'shop'
+                        }, {
+                            id: 2,
+                            name: 'ป้าย LED Display',
+                            icon: 'settings-brightness'
+                        }, {
+                            id: 3,
+                            name: 'บทความ สาระน่ารู้',
+                            icon: 'create'
+                        }],
+                        notify: true
+                    }
+                };
+            }
+            constructor() {
+                super();
+            }
+
+        }
+
+        window.customElements.define(NavList.is, NavList);
+    </script>
+</dom-module>

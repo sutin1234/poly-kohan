@@ -1,0 +1,90 @@
+<link rel="import" href="./polymer-element.html">
+<link rel="import" href="./nav-list.html">
+
+
+<dom-module id="polymer-toolbar">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+            app-toolbar {
+                background-color: #dd0404;
+                color: #fff;
+            }
+            app-header {
+                @apply --layout-fixed-top;
+                color: #fff;
+                --app-header-background-rear-layer: {
+                    background-color: #ef6c00;
+                };
+            }
+            app-drawer {
+                 --app-drawer-scrim-background: rgba(79, 79, 82, 0.5);
+                --app-drawer-content-container: {
+                background-color: #fff;
+                }
+            }
+            app-header {
+                background-color: red;
+                --app-header-background-rear-layer: {
+                    /* The header is blue when condensed */
+                    background-color: blue;
+                };
+            }
+            iron-image {
+                --iron-image-width: 100%;
+            }
+            h4 {
+                background-color: #dd0404;
+                color: #fff;
+                padding: 10px;
+                font-size: 20px;
+            }
+            iron-icon {
+                margin-right: 10px;
+            }
+        </style>
+
+        <app-header reveals>
+        <app-toolbar>
+            <paper-icon-button icon="menu" drawer-toggle on-click="onDrawToggle"></paper-icon-button>
+            <div main-title>บริษัท โกฮาน(ประเทศไทย) จำกัด</div>
+        </app-toolbar>
+        </app-header>
+
+        <app-drawer id="drawer" swipe-open>
+          <div style="height: 100%;margin-bottom: 10px;">
+              <!--
+              <app-toolbar>
+                  <iron-icon icon="menu"></iron-icon> โปรดักของเรา
+              </app-toolbar>
+            -->
+              <nav-list></nav-list>
+          </div>
+        </app-drawer>
+    </template>
+    <script>
+        class PolymerToolbar extends Polymer.Element {
+            static get is() {
+                return 'polymer-toolbar';
+            }
+            static get properties() {
+                return {
+
+                };
+            }
+
+            constructor() {
+                super();
+                console.log('paper-toolbar loaded')
+            }
+            onDrawToggle() {
+                this.$.drawer.toggle();
+            }
+
+        }
+
+        window.customElements.define(PolymerToolbar.is, PolymerToolbar);
+    </script>
+</dom-module>

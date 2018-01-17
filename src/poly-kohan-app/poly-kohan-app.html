@@ -1,0 +1,92 @@
+<link rel="import" href="./elements/polymer-element.html">
+<link rel="import" href="./elements/toolbar.html">
+
+<dom-module id="poly-kohan-app">
+    <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <!-- see location -->
+    <app-location route="{{route}}" use-hash-as-path></app-location>
+    
+    <!-- route -->
+    <app-route route="{{route}}" 
+               pattern="/:page" 
+               data="{{routeData}}" 
+               tail="{{subroute}}">
+    </app-route>
+
+    
+    
+
+    <polymer-toolbar></polymer-toolbar>
+
+    
+
+    <h2>Hello [[prop1]]!</h2>
+
+    <!-- page change -->
+    <iron-pages selected="[[routeData.page]]"
+                attr-for-selected="name"
+                fallback-selection="view404"
+                role="main">
+                
+    <!-- page injection -->
+    <div name="">
+           page: homepage
+       </div>
+       <div name="product">
+           <h2>page: [[routeData.page]]</h2>
+       </div>
+       <div name="view404">
+           page: view404
+       </div>
+       
+       
+    </iron-pages>
+    full path: {{ json(route.path) }} <br>
+    page: {{ json(routeData.page) }} <br >
+    subroute: {{ json(subroute.path) }}
+    
+  </template>
+
+    <script>
+        /**
+         * @customElement
+         * @polymer
+         */
+        class PolyKohanApp extends Polymer.Element {
+            static get is() {
+                return 'poly-kohan-app';
+            }
+            static get properties() {
+                return {
+                    prop1: {
+                        type: String,
+                        value: 'poly-kohan-app'
+                    }
+                };
+            }
+            static get observers() {
+                return [
+                    '_routeChanged(route.*)'
+                ]
+            }
+            _routeChanged(changeRecord) {
+                console.log('routeChanged ', changeRecord)
+            }
+            json(arr) {
+                console.log(arr)
+                return JSON.stringify(arr);
+            }
+            ready() {
+                super.ready();
+                this.set('route.path', '/');
+            }
+        }
+
+        window.customElements.define(PolyKohanApp.is, PolyKohanApp);
+    </script>
+</dom-module>

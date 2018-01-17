@@ -1,0 +1,97 @@
+<link rel="import" href="./polymer-element.html">
+
+<dom-module id="nav-list-item">
+    <template>
+        <style>
+            :host {
+                display: flex;
+                flex-direction: column;
+            }
+           iron-list {
+               flex: 1 1 auto;
+           }
+           .item {
+                padding: 5px;
+                font-size: 18px;
+                padding-left: 10px;
+                cursor: pointer;
+                
+           }
+           .item:hover {
+               background-color: #eee;
+               
+           }
+           
+        </style>
+        <div class="fit vertical layout">
+            <iron-list class="flex" items="[[itemData]]" as="item">
+                <template>
+                    <div class="item">
+                            <a href="#/product/[[item]]">
+                                [[item]]
+                            </a>
+                    </div>
+    </template>
+    </iron-list>
+    </div>
+
+
+    </template>
+
+    <script>
+        class NavListItem extends Polymer.Element {
+            static get is() {
+                return 'nav-list-item';
+            }
+
+            static get properties() {
+                return {
+                    itemData: {
+                        type: Array,
+                        notify: true
+                    },
+                    id: {
+                        type: Number,
+                        notify: true,
+                        observer: '_idChanged'
+                    }
+                };
+            }
+            constructor() {
+                super();
+
+            }
+
+            _idChanged(newValue, oldValue) {
+                this.getItemData(newValue);
+            }
+            getItemData(item_id) {
+                this.itemData = this.itemAll(item_id);
+            }
+            json(dataArray) {
+                return JSON.stringify(dataArray);
+            }
+            connectedCallback() {
+                super.connectedCallback();
+                console.log('navListIten connectedCallback')
+            }
+
+            itemAll(id) {
+                var items = [
+                    // fingerprint
+                    ['สแกนลายนิ้วมือ+ทาบบัตร', 'Access Control', 'สแกนลายนิ้วมือ+ลงเวลา', 'ทาบบัตร+ควบคุมประตู', 'อุปกรณ์เสริม'],
+                    // cctv
+                    ['กล้อง AHD', 'กล้อง IP CAMERA', 'กล้อง SpeedDome', 'กล้อง MiniDome', 'กล้อง WIFI Kit', 'เครื่องบันทึก HVR', 'เครื่องบันทึก NVR'],
+                    // led display
+                    ['ป้ายไฟวิ่ง Single Color', 'ป้ายไฟวิ่ง Dual Color', 'ป้าย LED RGB'],
+                    // article & knowledge
+                    ['เครื่องสแกนลายนิ้วมือ', 'กล้องวงจรปิด', 'ป้ายไฟวิ่ง จอแอลอีดี']
+                ]
+                return items[id];
+            }
+
+        }
+
+        window.customElements.define(NavListItem.is, NavListItem);
+    </script>
+</dom-module>
