@@ -1,0 +1,36 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+
+<dom-module id="not-page">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+
+        <h1>404</h1>
+
+    </template>
+
+    <script>
+        class NotPage extends Polymer.Element {
+            static get is() {
+                return 'not-page';
+            }
+            static get properties() {
+                return {
+
+                };
+            }
+            constructor() {
+                super();
+            }
+            ready() {
+                super.ready();
+            }
+
+        }
+
+        window.customElements.define(NotPage.is, NotPage);
+    </script>
+</dom-module>

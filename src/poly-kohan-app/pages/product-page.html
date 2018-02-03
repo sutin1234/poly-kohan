@@ -1,0 +1,36 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+
+<dom-module id="product-page">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+
+        <h1>Product Pages</h1>
+
+    </template>
+
+    <script>
+        class ProductPage extends Polymer.Element {
+            static get is() {
+                return 'product-page';
+            }
+            static get properties() {
+                return {
+
+                };
+            }
+            constructor() {
+                super();
+            }
+            ready() {
+                super.ready();
+            }
+
+        }
+
+        window.customElements.define(ProductPage.is, ProductPage);
+    </script>
+</dom-module>

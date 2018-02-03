@@ -44,23 +44,46 @@
             iron-icon {
                 margin-right: 10px;
             }
+            paper-menu-button {
+                --paper-menu-button: {
+                    right: 3px !important;
+                }
+                --paper-menu-button-dropdown: {
+                    top: 8px !important;
+                    right: 8px !important;
+                    width: 180px !important;
+                    cursor: pointer;
+                   
+                  
+                }
+            }
+                 
         </style>
-
+        <app-location route="{{route}}" use-hash-as-path></app-location>
         <app-header reveals>
         <app-toolbar>
-            <paper-icon-button icon="menu" drawer-toggle on-click="onDrawToggle"></paper-icon-button>
+            <paper-icon-button icon="menu" on-click="onDrawToggle"></paper-icon-button>
             <div main-title>บริษัท โกฮาน(ประเทศไทย) จำกัด</div>
+            <div flex></div>
+            
+            <paper-menu-button  horizontal-align="right">
+            <paper-icon-button icon="more-vert" slot="dropdown-trigger"></paper-icon-button>
+            <paper-listbox slot="dropdown-content" horizontal-align="right">
+                <paper-item>
+                    <iron-icon icon="lock"></iron-icon> เข้าสู่ระบบ
+                </paper-item>
+                <paper-item>
+                    <iron-icon icon="assignment"></iron-icon> ลงทะเบียน
+                </paper-item>
+            </paper-listbox>
+            </paper-menu-button>
+            
         </app-toolbar>
         </app-header>
 
-        <app-drawer id="drawer" swipe-open>
+        <app-drawer id="drawer">
           <div style="height: 100%;margin-bottom: 10px;">
-              <!--
-              <app-toolbar>
-                  <iron-icon icon="menu"></iron-icon> โปรดักของเรา
-              </app-toolbar>
-            -->
-              <nav-list></nav-list>
+              <nav-list></nav-list> <!-- list menu -->
           </div>
         </app-drawer>
     </template>
@@ -72,7 +95,27 @@
             static get properties() {
                 return {
 
-                };
+                }
+            }
+            static get observers() {
+                return [
+                    '_routeChanged(route.*)'
+                ]
+            }
+            static get behaviors() {
+                return [
+                    Polymer.NeonAnimationRunnerBehavior
+                ]
+            }
+            _routeChanged(changeRecord) {
+                var paths = changeRecord.base.path;
+                var findPath = paths.indexOf('/product');
+
+                if (findPath != -1) {
+                    // have path: product
+                    this.$.drawer.toggle();
+                }
+
             }
 
             constructor() {
@@ -80,6 +123,7 @@
                 console.log('paper-toolbar loaded')
             }
             onDrawToggle() {
+                console.log(this.$.drawer)
                 this.$.drawer.toggle();
             }
 

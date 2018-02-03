@@ -1,5 +1,8 @@
 <link rel="import" href="./elements/polymer-element.html">
 <link rel="import" href="./elements/toolbar.html">
+<link rel="import" href="./pages/home-page.html">
+<link rel="import" href="./pages/product-page.html">
+<link rel="import" href="./pages/not-found-page.html">
 
 <dom-module id="poly-kohan-app">
     <template>
@@ -35,13 +38,13 @@
                 
     <!-- page injection -->
     <div name="">
-           page: homepage
+           <home-page></home-page>
        </div>
        <div name="product">
-           <h2>page: [[routeData.page]]</h2>
+          <product-page></product-page>
        </div>
        <div name="view404">
-           page: view404
+         <not-page></not-page>
        </div>
        
        
@@ -53,10 +56,6 @@
   </template>
 
     <script>
-        /**
-         * @customElement
-         * @polymer
-         */
         class PolyKohanApp extends Polymer.Element {
             static get is() {
                 return 'poly-kohan-app';
@@ -76,6 +75,10 @@
             }
             _routeChanged(changeRecord) {
                 console.log('routeChanged ', changeRecord)
+                var path = changeRecord.base.path;
+                changeRecord.base.path = encodeURIComponent(path.replace(/ /g, "-"));
+                console.log(changeRecord.base.path)
+
             }
             json(arr) {
                 console.log(arr)
@@ -83,7 +86,10 @@
             }
             ready() {
                 super.ready();
-                this.set('route.path', '/');
+                if (!this.route.path) {
+                    this.set('route.path', '/');
+                }
+
             }
         }
 

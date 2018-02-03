@@ -1,0 +1,37 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+
+<dom-module id="home-page">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+
+        <h1>Home Page</h1>
+
+    </template>
+
+    <script>
+        class HomePage extends Polymer.Element {
+
+            static get is() {
+                return 'home-page';
+            }
+            static get properties() {
+                return {
+
+                };
+            }
+            constructor() {
+                super();
+            }
+            ready() {
+                super.ready();
+            }
+
+        }
+
+        window.customElements.define(HomePage.is, HomePage);
+    </script>
+</dom-module>

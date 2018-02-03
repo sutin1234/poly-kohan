@@ -1,0 +1,29 @@
+{
+    "name": "poly-kohan",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "directories": {
+        "test": "test"
+    },
+    "dependencies": {
+        "browser-sync": "^2.23.6",
+        "gulp": "^3.9.1"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "dev": "polymer serve --port 8081 | npm run watch",
+        "test": "polymer test",
+        "watch": "browser-sync start --proxy localhost:8081 --files \"src/**/*.*, index.html, *.js\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sutin1234/poly-kohan.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/sutin1234/poly-kohan/issues"
+    },
+    "homepage": "https://github.com/sutin1234/poly-kohan#readme"
+}
